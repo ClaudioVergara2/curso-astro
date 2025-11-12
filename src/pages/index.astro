@@ -1,5 +1,6 @@
 ---
-import "./styles.css";
+import BaseLayout from "./layouts/BaseLayout.astro";
+import "../styles.css";
 import DogPics from "./components/DogPics.astro";
 const title = "Hello World!";
 const imageError = "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
@@ -7,16 +8,7 @@ const res = await fetch("https://dog.ceo/api/breeds/image/random/5");
 const response = await res.json();
 const dogImageUrls = response?.message ?? [imageError];
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-  <body>
+<BaseLayout title="Home">
     <h1>{title}</h1>
     <DogPics urls={dogImageUrls} />
     <div>
@@ -25,8 +17,8 @@ const dogImageUrls = response?.message ?? [imageError];
     <div>
       <img id="cat-image" style="max-width: 400px; height: auto;" />
     </div>
-  </body>
-</html>
+    <a href="/about">Go to about page</a>
+</BaseLayout>
 
 <script>
 import { setupCatFactButton } from "./cat";
